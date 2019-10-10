@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hello Vue</title>
+  <script src="./bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+  
+
+  <div id="app">
+    <h1>
+        <small v-if="personalInfoLoading">(loading)</small>
+        {{ personalInfo.firstname }}
+        {{ personalInfo.lastname }}
+    </h1>
+  </div>
+
+  <script>
+  const personalApi = "http://www.mocky.io/v2/5d8df71a310000a2612b5221"
+
+  let app = new Vue({
+    el: '#app',
+
+    data: {
+      personalInfo: {},
+      personalInfoLoading: true,
+
+    },
+
+    created() {
+      fetch(personalApi + '?mocky-delay=1s')
+      .then(r => r.json())
+      .then(r => {
+        this.personalInfoLoading = false
+        this.personalInfo = r
+      })
+    }
+  })
+
+  setTimeout(() => {
+    app.personalInfo = {
+      firstname: 'Tamás',
+      lastname: 'Görgics',
+    }
+  }, 5000)
+  </script>

@@ -1,0 +1,14 @@
+{
+  "name": "vuejs-backenders",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "bower": "bower",
+    "start": "serve ."
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bower": "^1.8.8",
+    "serve": "^11.2.0"
+  }
+}

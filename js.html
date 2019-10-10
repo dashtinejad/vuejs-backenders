@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Welcome</title>
+</head>
+<body>
+  
+
+  <h1>
+    Welcome,
+    <small id="loading">(loading)</small>
+    <span id="firstname"></span>
+    <span id="lastname"></span>
+  </h1>
+
+  <script>
+    function buildUi(data) {
+      document.getElementById('firstname').innerText = data.personalInfo.firstname;
+      document.getElementById('lastname').innerText = data.personalInfo.lastname;
+      document.getElementById('loading').style.display = data.personalInfoLoading ? 'inline' : 'none'
+    }
+
+    let data = {
+      personalInfo: {},
+      personalInfoLoading: true
+    }
+
+    function setState(key, val) {
+      data[key] = val
+      buildUi(data)
+    }
+
+    const personalApi = "http://www.mocky.io/v2/5d8df71a310000a2612b5221"
+
+    fetch(personalApi + '?mocky-delay=3s')
+      .then(r => r.json())
+      .then(r => {
+        // console.log(r)
+        // data.personalInfoLoading = false
+        // data.personalInfo = r
+
+        setState('personalInfoLoading', false)
+        setState('personalInfo', r)
+
+      })
+  </script>
